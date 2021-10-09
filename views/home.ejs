@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>
+            <%= title%>
+        </title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">            <!-- font awesome CDN -->
+        <link rel="stylesheet" href="/css/home.css">                <!-- //css file -->
+    </head>
+    
+    <body>
+        <h1>TODO List</h1>
+
+        <div id="input" class="align relative brd">             <!-- main form to enter tasks and add to database -->
+            <form method="POST" action="/create-task">
+                <div id="tsk" class="absolute">             <!-- for task -->
+                    <h3 class="display">TASK TO BE DONE:</h3>
+                    <input type="text" name="task" placeholder="What do you need to do?" require
+                </div>
+                <div id="catg" class="display absolute">
+                    <h3 class="display">CATEGORY:</h3>              <!-- for category -->
+                    <select name="category" id="catgry">
+                        <option value="personal"> Personal </option>
+                        <option value="work"> Work </option>
+                        <option value="home"> Home </option>
+                        <option value="school"> School </option>
+                        <option value="other"> Other </option>
+                    </select>
+                </div>
+                <div id="det" class="display absolute">             <!-- for date -->
+                    <h3 class="display">DATE:</h3>
+                    <input type="date" name="date" required>
+                </div>
+
+                <button type="submit" id="add" class="absolute">                <!-- button to add task -->
+                    <i class="fas fa-plus"></i>
+                    ADD TASK
+                </button>
+
+            </form>
+        </div>
+
+
+        <div id="display-list" class="align relative">              <!-- to display list of tasks and delete -->
+            <form action="/delete-task" method="POST">
+                <button type="submit" id="delete">              <!-- button to delete task -->
+                    <i class="fas fa-trash-alt"></i>
+                    DELETE TASK 
+                </button>
+                <% for(let i of todo_list){ %>
+                        <div class="list brd">
+                    <input type="checkbox" name="<%= i._id %>" value="<%= i._id %>" id="ckbox" class="absolute">                <!-- checkbox to select a particular task -->
+                            <b> <p id="task" class="display absolute"> <%= i.task %> </p> </b>
+                            <br>
+                            <i class="fas fa-calendar-alt absolute"></i> <p class="display absolute" id="date"> <%= i.date %> </p>
+
+                            <div id="type">
+                                <p id="category"> <%= i.category %> </p>
+                            </div>
+                        </div>
+                <% } %>
+            </form>
+        </div>
+
+    </body>
+</html>
